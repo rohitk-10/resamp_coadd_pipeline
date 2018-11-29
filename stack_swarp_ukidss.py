@@ -119,14 +119,18 @@ def run_swarp(input_args, img_dir, wht_dir, outdir, keyw_dict, swarp_config,
         # Now load up each image and compute the flux scale needed to change to zpt_fin
         for img in img_list:
             with fits.open(img, mode='update') as hdul:
-                hdr = hdul[0].header
-                zpt_curr = hdr[keyw_dict["mag_zpt"]]
-                texp = hdr[keyw_dict["exp_time"]]
-                zpt_curr = zpt_curr + 2.5 * np.log10(texp) + mvega
+                hdr0 = hdul[0].header
+                exp_time0 = hdr0["EXP_TIME"]
+                for hext in range(1,5):
+                    hdr = hdul[hext].header
+                    zpt_curr = hdr[keyw_dict["mag_zpt"]]
+                    # texp = hdr[keyw_dict["exp_time"]]/exp_time0
+                    texp = exp_time0
+                    zpt_curr = zpt_curr + 2.5 * np.log10(texp) + mvega
 
-                # Compute the flux scale required
-                flux_scale = 10**((zpt_fin - zpt_curr)/2.5)
-                hdr["FLXSCALE"] = flux_scale
+                    # Compute the flux scale required
+                    flux_scale = 10**((zpt_fin - zpt_curr)/2.5)
+                    hdr["FLXSCALE"] = flux_scale
                 hdul.flush()
         print("Finished adjusting the zero-points and added FLXSCALE to header")
         print("#########################################")

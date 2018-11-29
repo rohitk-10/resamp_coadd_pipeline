@@ -59,9 +59,9 @@ keyw_dict["exp_time"] = "EXPTIME"  	    # Exposure time keyword
 
 # Setup some other constants which are used for naming folders/files (not for actual swarping)
 naming_dict = dict()
-naming_dict["filt"] = "Kuband"               # NAMING PRPOSE ONLY: (added to name of output images and swarp log folder)
-naming_dict["field"] = "EN1"                # Field - for selected image RA, Dec centres: Option: "EN1" or "Lockman"
-naming_dict["outfile_pre"] = "EL_EN1_"      # Pre-fix for the output image start
+naming_dict["filt"] = "uband"               # NAMING PRPOSE ONLY: (added to name of output images and swarp log folder)
+naming_dict["field"] = "Lockman"                # Field - for selected image RA, Dec centres: Option: "EN1" or "Lockman"
+naming_dict["outfile_pre"] = "LH_"      # Pre-fix for the output image start
 
 # Setup some constants in a dict for flux and astrometry realted swarp configs
 sw_fixed = dict()
@@ -71,7 +71,7 @@ sw_fixed["pix_scale"] = 0.2             # Pixel scale of the output image
 sw_fixed["imsize"] = "90000,75000"      # Final image size (a string)
 
 # The swarp configuration file
-sw_config_file = "weighted_64_3.swarp"
+sw_config_file = "weighted_128_3_ps.swarp"
 
 # Now call the function that runs the swarp, which uses input from this file
 sw.run_swarp(args, im_path, wht_path, out_path, keyw_dict, sw_config_file,
