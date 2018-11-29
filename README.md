@@ -42,3 +42,4 @@ The following scripts are available to use:
 - stack_swarp.py - Main script which contains the function to run swarp
 - setup_swarp.py - Setup script which defines the input to stack_swarp.py 
 - *.swarp - The swarp configuration file (edit this to edit configurations for swarp)
+- stack_swarp_ukidss.py - Same as stack_swarp.py but for UKIDSS images to deal with the multiple-FITS extensions for adding FLXSCALE keyword. Rest of the pipeline is exactly the same as the stack_swarp.py code.
