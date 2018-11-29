@@ -1,6 +1,12 @@
-# pix_resc
+# Pipeline for resampling and coadding FITS images
 Python script which takes in science and weight images and runs SWarp on the images to adjust the pixel scale and flux scale of the image.
-The code first edits the input images headers to adjust to the desired zeropoint and then runs SWarp to make a final "big" image and weight map with the desired zeropoint and pixel size and image size.
+
+The code has three main blocks which can all be performed in one run on a set of images. Or, you can choose the blocks that run from:
+- Edit the input image headers to adjust to the desired zeropoint.
+- Run SWarp to resample the input images and weight maps to desired zeropint and pixel and image size.
+- Co-add the resampled images to make either a science mosaic or, make a $\chi^2$ detection image.
+
+When making a $\chi^2$ detection image, input images and weights from multiple filters can be supplied.
 
 The python code is a modified version of the IDL code written by Boris Haubler and we thank Boris for all the help provided when trying to run and understand the original IDL code.
 
@@ -14,31 +20,19 @@ astropy
 
 ## Usage
 ```python
-python setup_swarp.py "path/to/science/images/sci*.fits" "path/to/wht/images/wht*fits" "path/to/output/dir" False
+python setup_swarp.py images_filename weights_filename /path/to/output/dir --ADD_FLXSCALE N --RESAMP N --COMB_TYPE NONE --DELTMP N
 ```
 
 For help, on usage type:
 ```python
 python stack_swarp.py -h
 
-usage: setup_swarp.py [-h] img_path wht_path out_path skip_fscale
-
-Adjust flux scale and pixel scale of input images using SWarp to build one big
-image
-
-positional arguments:
-  img_path     Path and name identifier for input science images
-  wht_path     Path and name identifier for input weight images
-  out_path     Path to store output images
-  skip_fscale  If FLXSCALE keyword present already, then you can choose to skip (==True) or add keyword (==False)
-
-optional arguments:
-  -h, --help   show this help message and exit
 ```
+
+### Command Line Options
 
 ## Files
 The following scripts are available to use:
 - stack_swarp.py - Main script which contains the function to run swarp
 - setup_swarp.py - Setup script which defines the input to stack_swarp.py 
-- *.swarp - The swarp configuration file (edit this to edit configurations)
-
+- *.swarp - The swarp configuration file (edit this to edit configurations for swarp)
