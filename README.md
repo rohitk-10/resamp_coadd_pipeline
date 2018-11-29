@@ -1,5 +1,5 @@
 # Pipeline for resampling and coadding FITS images using SWarp
-Python script which takes in science and weight images and runs [SWarp](http://adsabs.harvard.edu/abs/2002ASPC..281..228B) on the images to adjust the pixel scale and flux scale of the image. 
+Python script which takes in science and weight images and runs SWarp ([Bertin et. al. 2002](http://adsabs.harvard.edu/abs/2002ASPC..281..228B)) on the images to adjust the pixel scale and flux scale of the image. 
 
 The code has three main blocks which can all be performed in one run on a set of images. Or, you can choose the blocks that run from:
 - Edit the input image headers to adjust to the desired zeropoint.
