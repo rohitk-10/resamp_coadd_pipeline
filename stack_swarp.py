@@ -12,7 +12,9 @@ import argparse
 
 """
 Contact: Rohit Kondapally, rohitk "at" roe.ac.uk
-Acknowledgement: This code is adapted and based on the IDL code written by Boris Haubler. We thank Boris for all the help in running and understanding the original code.
+Acknowledgements: 
+This code uses SWarp (Bertin et. al. 2002) (see readme for ADS link) to perform the resampling and co-addition part of the code.
+This code is adapted and based on the IDL code written by Boris Haubler. We thank Boris for all the help in running and understanding the original code.
 
 # Script to take images and weight maps and run swarp to:
 # 	1. Change pixel-scale of the images to a common standard
