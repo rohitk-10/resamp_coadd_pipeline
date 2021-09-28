@@ -1,0 +1,5 @@
+*~
+*.txt
+*.swarp
+screenlog*
+swarp_logs_*/

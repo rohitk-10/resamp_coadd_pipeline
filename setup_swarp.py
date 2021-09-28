@@ -59,9 +59,9 @@ keyw_dict["exp_time"] = "EXPTIME"  	    # Exposure time keyword
 
 # Setup some other constants which are used for naming folders/files (not for actual swarping)
 naming_dict = dict()
-naming_dict["filt"] = "uband"               # NAMING PRPOSE ONLY: (added to name of output images and swarp log folder)
-naming_dict["field"] = "Lockman"                # Field - for selected image RA, Dec centres: Option: "EN1" or "Lockman"
-naming_dict["outfile_pre"] = "LH_"      # Pre-fix for the output image start
+naming_dict["filt"] = "hscg"               # NAMING PRPOSE ONLY: (added to name of output images and swarp log folder)
+naming_dict["field"] = "EN1"                # Field - for selected image RA, Dec centres: Option: "EN1" or "Lockman"
+naming_dict["outfile_pre"] = "EN1_"      # Pre-fix for the output image start
 
 # Setup some constants in a dict for flux and astrometry realted swarp configs
 sw_fixed = dict()
