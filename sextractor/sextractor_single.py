@@ -94,11 +94,12 @@ if os.path.exists(time.strftime("%d_%m_%Y_1")):
 
     # Get list of directories created today
     outdir_base = time.strftime("%d_%m_%Y")
-    dirs_today = sorted(glob.glob(outdir_base+"*"))
+    dirs_today = glob.glob(outdir_base+"*")
 
     # Now create a new output directory name by adding one to the last number
-    # last_num = int(dirs_today[-1][11:])+1
-    last_num = int(dirs_today[-1].split("_")[-1]) + 1
+    last_num = max([int(num.split("_")[-1]) for num in dirs_today]) + 1
+    # Old code, which won't work aftter 10 directories, due to the way sorted() above works
+    # last_num = int(dirs_today[-1].split("_")[-1]) + 1
 
     # Now finally create the directory
     outdir_base = outdir_base+"_"+str(last_num)
