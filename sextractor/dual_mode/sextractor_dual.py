@@ -14,52 +14,11 @@ Script to run SExtractor on one band to detect and measure on that same band
 """
 
 
-def sextractor_single(filt, image_name, weight_name, config_file, output_cat, config_dict, outdir_name):
-
-    com_str = ("sex " + image_name + " -c " + config_file +
-               " -CHECKIMAGE_TYPE BACKGROUND,APERTURES,SEGMENTATION,-BACKGROUND" +
-               " -CHECKIMAGE_NAME "+filt+"_BACK.fits,"+filt+"_aper.fits,"+filt+"_smap.fits,"+filt+"_-BACK.fits" +
-               " -CATALOG_NAME "+output_cat + " -WEIGHT_IMAGE "+weight_name)
-
-    # Add the commands from the dictionary
-    c_keys = list(config_dict.keys())
-    c_vals = list(config_dict.values())
-
-    for k in range(len(config_dict)):
-        com_str = com_str + " -"+c_keys[k] + " " + str(c_vals[k])
-
-    # Print the SExtractor command run
-    print("SExtractor command run: ")
-    print(com_str)
-
-    # Make a subdirectory within outdir_name to store the SExtractor inputs
-    outdir_inputs = outdir_name+'/sextractor_inputs'
-    os.makedirs(outdir_inputs)
-
-    # Store the SExtractor command run in a text file
-    with open(outdir_inputs+"/sextractor_command", 'w') as fout:
-        fout.write(com_str)
-
-    # Copy the configuration file too
-    os.system("cp " + str(config_file) + " "+outdir_inputs+"/")
-
-    # Now run the SExtractor command
-    os.system(com_str)
-
-    # Now move the check-images to the output directory
-    os.system("mv "+filt+"*.fits "+outdir_name+"/")
-
-    return
-
-
-def sextractor_dual(det_band, det_dict, phot_band, image_name, weight_name, config_file, config_dict, outdir_name):
+def sextractor_dual(det_band, det_dict, phot_band, image_name, weight_name, config_file, output_cat, config_dict, outdir_name):
     """
     New arguments:
     det_band = chi2all (This is just a naming convention that I used for the output directory/file structure)
     """
-
-    # Generate the output catalogue name
-    output_cat = outdir_name + "/cat_" + det_band + "_" + phot_band + ".fits"
 
     # List the two weight maps to use
     wht_str = (" -WEIGHT_TYPE MAP_WEIGHT,MAP_WEIGHT"
@@ -181,6 +140,6 @@ for f_i, filt in enumerate(filters):
     whts = wht_paths[f_i]
 
     # Name of the output catalog
-    outcat = outdir_name + "/cat_{0}.fits".format(filt)
+    outcat = outdir_name + "/cat_{0}_{1}.fits".format(det_band, filt)
 
-    sextractor_dual(filt, imgs, whts, config, outcat, sex_config, outdir_name)
+    sextractor_dual(det_band, det_dict, filt, imgs, whts, config, outcat, sex_config, outdir_name)
